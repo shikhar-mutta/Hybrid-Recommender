@@ -1,0 +1,15 @@
+\begin{tabular}{lccc}
+\toprule
+ & precision@10 & recall@10 & NDCG@10 \\
+\midrule
+Popularity & 0.119 ± 0.003 & 0.097 ± 0.001 & 0.157 ± 0.003 \\
+Item-based CF & 0.174 ± 0.004 & 0.169 ± 0.003 & 0.231 ± 0.002 \\
+Content only (profile) & 0.003 ± 0.001 & 0.006 ± 0.002 & 0.007 ± 0.002 \\
+RWR (ratings only) & 0.174 ± 0.004 & 0.169 ± 0.004 & 0.235 ± 0.005 \\
+RWR + popularity discount & 0.197 ± 0.005 & 0.189 ± 0.001 & 0.266 ± 0.006 \\
+Late fusion (CF+content) & 0.172 ± 0.002 & 0.169 ± 0.003 & 0.232 ± 0.001 \\
+Hybrid RWR & 0.184 ± 0.005 & 0.179 ± 0.003 & 0.251 ± 0.006 \\
+Hybrid RWR + popularity discount & 0.187 ± 0.005 & 0.184 ± 0.004 & 0.256 ± 0.007 \\
+node2vec on hybrid graph & 0.045 ± 0.003 & 0.068 ± 0.005 & 0.067 ± 0.006 \\
+\bottomrule
+\end{tabular}

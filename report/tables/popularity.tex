@@ -1,0 +1,15 @@
+\begin{tabular}{lcccc}
+\toprule
+ & precision@10 & outside top-10\% popular & catalogue coverage & mean log(1+\#ratings) \\
+\midrule
+Popularity & 0.119 & 0.000 ± 0.000 & 0.005 ± 0.000 & 5.265 ± 0.001 \\
+Item-based CF & 0.174 & 0.029 ± 0.003 & 0.050 ± 0.003 & 4.603 ± 0.008 \\
+Content only (profile) & 0.003 & 0.949 ± 0.008 & 0.034 ± 0.001 & 1.353 ± 0.049 \\
+RWR (ratings only) & 0.174 & 0.000 ± 0.000 & 0.012 ± 0.001 & 5.167 ± 0.001 \\
+RWR + popularity discount & 0.197 & 0.052 ± 0.004 & 0.049 ± 0.000 & 4.797 ± 0.011 \\
+Late fusion (CF+content) & 0.172 & 0.033 ± 0.002 & 0.052 ± 0.001 & 4.580 ± 0.016 \\
+Hybrid RWR & 0.184 & 0.034 ± 0.002 & 0.028 ± 0.001 & 5.002 ± 0.007 \\
+Hybrid RWR + popularity discount & 0.187 & 0.046 ± 0.010 & 0.032 ± 0.004 & 4.927 ± 0.059 \\
+node2vec on hybrid graph & 0.045 & 0.704 ± 0.006 & 0.287 ± 0.002 & 2.020 ± 0.025 \\
+\bottomrule
+\end{tabular}

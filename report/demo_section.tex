@@ -1,0 +1,17 @@
+We use all ratings (no hidden test set) and the hyper-parameters validated on split~0 ($c=0.7$, $\lambda=0.1$).
+
+\paragraph{(a) One user, every method side by side.} User~105 rated \emph{3 Idiots} and \emph{Taare Zameen Par} highly (the example of the brief). \Cref{tab:demo} shows the top 10 of each method (number of ratings in brackets). Item-based CF and the plain walk give mainstream blockbusters (\emph{Star Wars}, \emph{Toy Story}, \emph{Jurassic Park}); the hybrid at $\lambda=0.1$ is close to the walk with some reordering; the popularity-discounted hybrid swaps a few blockbusters for slightly less-rated films (e.g.\ \emph{The Big Lebowski}, with 106 ratings); \emph{content only} returns films on similar subjects that almost nobody rated ($1$--$8$ ratings), and node2vec returns only such obscure films. This is the accuracy--novelty picture of \cref{fig:pop} for one user.
+
+\begin{table}[H]\centering\tiny
+\resizebox{\linewidth}{!}{\input{tables/demo_user.tex}}
+\caption{Top-10 recommendations of each method for user 105 (in brackets: number of ratings of the film).}\label{tab:demo}\end{table}
+
+\paragraph{(b) A new film with no ratings.} We add films that are \emph{not in the data set}, described as a catalogue would (title, genres, a few tags), embed the text, link them to their $20$ nearest films and run the hybrid walk from every user. Collaborative methods cannot score these films at all (score exactly $0$ for all users); the hybrid reaches all $610$ users. Scores are compared \emph{within each user's shelf of new releases} (the $680$ films from 2015 on, as in the cold-start evaluation), and users are ranked by the percentile of the new film on their shelf. \Cref{tab:newfilm} checks the choice against \emph{anchor films} a sensible match should have liked: the top-20 users for \emph{Toy Story~4} ($75\%$ liked a Toy Story film vs.\ $28\%$ of all users; its content neighbours are \emph{Toy Story}, \emph{Toy Story 3}, \emph{Toy Story 2}) and for \emph{John Wick: Chapter 3} ($10\%$ vs.\ $3\%$) are clearly enriched in the expected audiences. For \emph{Dangal} the text gives poorer neighbours (\emph{Bollywood/Hollywood}, \emph{The Wrestler} but also \emph{Krabat}, \emph{Special}), because the dataset has only a few Indian films and our text has no synopsis; the enrichment ($20\%$ vs.\ $8\%$ liking an Indian anchor film) is lower but still $2.4\times$ chance.
+
+\begin{table}[H]\centering\small\input{tables/newfilm_summary.tex}
+\caption{New films: share of the 20 top-ranked users who liked at least one anchor film, vs.\ all users.}\label{tab:newfilm}\end{table}
+
+\paragraph{(c) Hide a real film and recover its audience.} To get ground truth we hid \emph{all} ratings of five famous films (with a random $10\%$ of films as a pool) and asked which users the hybrid would send each film to (\cref{tab:hidden}). Over the five films the hybrid finds on average $3.0$ real fans among its top 10 users, vs.\ $2.0$ expected by chance and $1.6$ for item-CF (whose ranking is arbitrary on films without ratings). This is a small sample (5 films) and is only an illustration; the quantitative estimate over $365$ cold films is the user-side lift of \cref{tab:cold} ($2.9\times$).
+
+\begin{table}[H]\centering\small\input{tables/hidden_films.tex}
+\caption{Hidden famous films: how many of the 10 users chosen by each method really liked the film.}\label{tab:hidden}\end{table}
