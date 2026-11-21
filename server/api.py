@@ -64,7 +64,7 @@ def newfilm(ttl, gen, tags, lam, top_users=15):
         L = ctx.Liked[u]; fav = L.indices[np.argsort(-L.data)][:4]
         out.append({"user": int(u + 1), "percentile": round(float(pct[u]), 2), "fav": [title[i] for i in fav]})
     return {"neighbours": [{"title": title[i], "genres": genres[i], "cos": round(float(C2[nI, i]), 3)} for i in nb],
-            "reached": int((s_new > 0).sum()), "users": out, "shelf": int(len(recent))}
+            "reached": int((s_new > 0).sum()), "users": out, "shelf": int(len(recent)), "pct": [round(float(x), 2) for x in pct]}
 
 
 class Handler(BaseHTTPRequestHandler):

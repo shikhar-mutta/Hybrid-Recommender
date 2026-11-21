@@ -2,9 +2,9 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide, forceX, forceY } from "d3-force";
 import { COLORS } from "../shared.js";
 
-const METHODS = ["Item-based CF", "RWR (ratings only)", "Content only", "Hybrid RWR", "Hybrid + popularity discount", "node2vec"];
+export const METHODS = ["Item-based CF", "RWR (ratings only)", "Content only", "Hybrid RWR", "Hybrid + popularity discount", "node2vec"];
 
-function FilmRow({ f, i, films, hl, setHl, tail }) {
+export function FilmRow({ f, i, films, hl, setHl, tail }) {
   return (
     <div className={"film" + (hl === i ? " hl" : "")} onMouseEnter={() => setHl(i)} onMouseLeave={() => setHl(null)}>
       <span className="pop">{films.pop[i]}★</span>

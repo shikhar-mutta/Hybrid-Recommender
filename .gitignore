@@ -11,6 +11,6 @@ data/ml.zip
 *.fdb_latexmk
 *.synctex.gz
 .ipynb_checkpoints/
-data/
+/data/
 AIM608-mini-projects.pdf
 WhatsApp Image*.jpeg

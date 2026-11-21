@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useData, useApi } from "./shared.js";
+import Demo from "./pages/Demo.jsx";
 import Overview from "./pages/Overview.jsx";
 import Recommend from "./pages/Recommend.jsx";
 import NewFilm from "./pages/NewFilm.jsx";
@@ -8,7 +9,7 @@ import Cold from "./pages/Cold.jsx";
 import Communities from "./pages/Communities.jsx";
 import Report from "./pages/Report.jsx";
 
-const TABS = [["Overview", Overview], ["Recommendations", Recommend], ["New film (cold start)", NewFilm],
+const TABS = [["Demo", Demo], ["Overview", Overview], ["Recommendations", Recommend], ["New film (cold start)", NewFilm],
   ["Accuracy & λ", Results], ["Cold start & popularity", Cold], ["Communities", Communities], ["Report & figures", Report]];
 
 class Boundary extends React.Component {
@@ -18,7 +19,7 @@ class Boundary extends React.Component {
 }
 
 export default function App() {
-  const [tab, setTabRaw] = useState(() => Math.min(6, +new URLSearchParams(location.hash.slice(1)).get("tab") || 0));
+  const [tab, setTabRaw] = useState(() => Math.min(7, +new URLSearchParams(location.hash.slice(1)).get("tab") || 0));
   const setTab = (i) => { setTabRaw(i); history.replaceState(null, "", "#tab=" + i); };
   const { d, err } = useData();
   const api = useApi();

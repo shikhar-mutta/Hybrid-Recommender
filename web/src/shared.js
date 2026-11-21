@@ -9,7 +9,7 @@ export const COLORS = {
 export const fmt = (v, d = 3) => (v == null ? "–" : Number(v).toFixed(d));
 export const pm = (a, d = 3) => `${fmt(a[0], d)} ± ${fmt(a[1], d)}`;
 
-const FILES = ["results", "films", "users", "communities"];
+const FILES = ["results", "films", "users", "communities", "vocab"];
 export function useData() {
   const [d, setD] = useState(null);
   const [err, setErr] = useState(null);

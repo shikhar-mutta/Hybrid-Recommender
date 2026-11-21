@@ -1,19 +1,20 @@
+import MultiSelect from "../MultiSelect.jsx";
 import React, { useState } from "react";
 
 const PRESETS = {
-  "Toy Story 4 (2019)": { title: "Toy Story 4", genres: "Adventure, Animation, Children, Comedy, Fantasy", tags: "pixar, toys, fun" },
-  "John Wick: Chapter 3 (2019)": { title: "John Wick Chapter 3 Parabellum", genres: "Action, Crime, Thriller", tags: "assassin, hitman, gun fu, keanu reeves" },
-  "Dangal (2016)": { title: "Dangal", genres: "Action, Drama", tags: "wrestling, sports, father daughter, india, inspirational, bollywood" },
+  "Toy Story 4 (2019)": { title: "Toy Story 4", genres: ["Adventure", "Animation", "Children", "Comedy", "Fantasy"], tags: ["pixar", "toys", "fun"] },
+  "John Wick: Chapter 3 (2019)": { title: "John Wick Chapter 3 Parabellum", genres: ["Action", "Crime", "Thriller"], tags: ["assassin", "hitman", "gun fu", "keanu reeves"] },
+  "Dangal (2016)": { title: "Dangal", genres: ["Action", "Drama"], tags: ["wrestling", "sports", "father daughter", "india", "inspirational", "bollywood"] },
 };
 
-export default function NewFilm({ api }) {
+export default function NewFilm({ d, api }) {
   const [f, setF] = useState({ ...PRESETS["Toy Story 4 (2019)"], lam: 0.1 });
   const [out, setOut] = useState(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(null);
   const go = () => {
     setBusy(true); setErr(null);
-    fetch("/api/newfilm", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(f) })
+    fetch("/api/newfilm", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...f, genres: f.genres.join(", "), tags: f.tags.join(", ") }) })
       .then((r) => r.json()).then((j) => (j.error ? setErr(j.error) : setOut(j))).catch((e) => setErr(String(e))).finally(() => setBusy(false));
   };
   return (
@@ -28,12 +29,12 @@ export default function NewFilm({ api }) {
         </div>
         <div className="grid g3">
           <label className="s">Title<input value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} /></label>
-          <label className="s">Genres (comma separated)<input value={f.genres} onChange={(e) => setF({ ...f, genres: e.target.value })} /></label>
-          <label className="s">Tags<input value={f.tags} onChange={(e) => setF({ ...f, tags: e.target.value })} /></label>
+          <MultiSelect label="Genres" options={d.vocab.genres} value={f.genres} onChange={(v) => setF({ ...f, genres: v })} placeholder="Choose genres…" />
+          <MultiSelect label="Tags" options={d.vocab.tags} value={f.tags} onChange={(v) => setF({ ...f, tags: v })} placeholder="Choose or type tags…" max={12} allowCustom />
         </div>
         <div className="row" style={{ marginTop: 10 }}>
           <label className="s">λ content weight: <b>{f.lam}</b><input type="range" min="0.01" max="0.5" step="0.01" value={f.lam} onChange={(e) => setF({ ...f, lam: +e.target.value })} /></label>
-          <button className="btn" onClick={go} disabled={!api || busy}>{busy ? "Running…" : "Recommend to users"}</button>
+          <button className="btn" onClick={go} disabled={!api || busy || f.genres.length === 0}>{busy ? "Running…" : "Recommend to users"}</button>
         </div>
         {err && <div className="warn" style={{ marginTop: 10 }}>{err}</div>}
       </div>

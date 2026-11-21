@@ -27,7 +27,7 @@ export default function Overview({ d, go }) {
       <div className="card">
         <h3>Where to look</h3>
         <div className="row">
-          {[[1, "Recommendations: pick a user, compare methods, explore the graph"], [2, "New film: who should get a film nobody rated?"], [3, "Accuracy and the weight of content λ"], [4, "Cold start and popularity"], [5, "Communities of taste"]].map(([i, t]) =>
+          {[[0, "Demo: pick a user → all methods side by side → add a new film"], [2, "Recommendations: graph explorer and live walk"], [3, "New film (cold start)"], [4, "Accuracy and the weight of content λ"], [5, "Cold start and popularity"], [6, "Communities of taste"]].map(([i, t]) =>
             <button key={i} className="btn sec" onClick={() => go(i)}>{t}</button>)}
         </div>
       </div>

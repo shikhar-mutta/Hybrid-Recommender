@@ -163,6 +163,7 @@ If the UI says it cannot load data: `./run.sh web-data` (re-exports `web/public/
 
 | Tab | Shows |
 |---|---|
+| **Demo** | the guided demo: 1 pick a user → 2 every method side by side → 3 add a film with no ratings and see which users the hybrid recommends it to |
 | Overview | headline numbers |
 | Recommendations | any of the 610 users: favourites + top-10 of six methods side by side, live walk with λ / c / β sliders, graph explorer |
 | New film (cold start) | add a film nobody rated (presets or your own title/genres/tags) and see which users it is recommended to |
